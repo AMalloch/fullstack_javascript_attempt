@@ -1,5 +1,5 @@
 var CoffeeView = function(){
-  this.types = [];
+  this.coffees = [];
 }
 
  module.exports = CoffeeView;
