@@ -38,6 +38,22 @@ MongoClient.connect("mongodb://localhost:27017", function(err, client){
     })
   });
 
+  // this ties up with the request.js
+  server.get("/api/coffees", function(req, res){
+    const coffeesCollection = db.collection("coffees");
+
+                                // all coffees is what you find on the collection
+    coffeesCollection.find().toArray(function(err, allCoffees){
+      if(err){
+        console.log(err);
+        res.status(500);
+        res.send();
+      }
+
+      res.json(allCoffees);
+    });
+  })
+
   server.listen(3000, function(){
     console.log("Listening on port 3000");
   });
