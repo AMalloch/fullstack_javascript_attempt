@@ -12,7 +12,30 @@ const getCoffeesRequestComplete = function(allCoffees){
   };
 };
 
+const createButtonClicked = function(event){
+  // prevent default will just stop a page refreshing
+  event.preventDefault();
+  console.log("Submit button clicked!");
+
+  const nameInputValue = document.querySelector("#name").value;
+  const coffeeInputValue = document.querySelector("#coffee").value;
+
+  const coffeeToSend = {
+    name: nameInputValue,
+    coffee: coffeeInputValue
+  };
+
+  request.post(createRequestComplete, coffeeToSend);
+};
+
+const createRequestComplete = function(responce){
+  coffeeView.addCoffee(responce);
+  console.log(responce);
+}
+
 const appStart = function(){
+  const createCoffeeButton = document.querySelector("#submit-coffee");
+  createCoffeeButton.addEventListener("click", createButtonClicked);
   request.get(getCoffeesRequestComplete);
 }
 
