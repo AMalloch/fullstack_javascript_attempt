@@ -54,6 +54,24 @@ MongoClient.connect("mongodb://localhost:27017", function(err, client){
     });
   })
 
+  server.delete("/api/coffees", function(req, res){
+  const coffeesCollection = db.collection("coffees");
+  // just an empty object
+  // tho it works without
+  const filterObject = {};
+
+  coffeesCollection.deleteMany(filterObject, function(err, result){
+    if(err){
+      console.log(err);
+      res.status(500);
+      res.send();
+    }
+
+    res.status(204);
+    res.send();
+  });
+})
+
   server.listen(3000, function(){
     console.log("Listening on port 3000");
   });
